@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y libglib2.0-0 libsm6 libxrender1 libxext
 
 # 3. Tentukan direktori kerja
 WORKDIR /app
-
+COPY firestore-key.json /app/
 # 4. Salin file package.json dan package-lock.json
 COPY package*.json ./
 
