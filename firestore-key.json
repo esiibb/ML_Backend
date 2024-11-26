@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "spry-water-442811-c5",
+  "private_key_id": "7ca09158474ef91f1222c77c459ac02a5c9381fb",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQD3RHfnaNKwerMi\n1uOCX1NWSfaDtbNHPO+21LuUxcPEk3NXp3VsmGZRDsKuMPnEeE6YE/OcyhHlMIh6\n0VNUspQ4zFKwwFjs33muz2WLxwNC3eOXju/MgY9DALPauKxauDgoD7OLzPXeSDIR\n7vrkp8ePxAvrFZDP5EDwu/3TbI4aGMhMnCOyuo0fBG85FeIN6E/2zaRWZH4kwKvm\n1T72mtQAaQk3xO28ZwFDclKgBNyodySTqZpbKXq4Wr3qp5cKT9kG27t1l/5XTvcz\n98frOM0yhs9tzen+cq8z1b8KRbMpSvQKHxGP3+aGuzLDy7dNlA2cWQwIgTuf0EcT\ng5//ovg3AgMBAAECggEAcuY8h2o0uTATDMXpK1xLd+XfqL1mpNxCkeVRkyTAvxg7\neUhF7uP0a4cd3N7COVMkRlPDGKDnZuZCDTw26j0fVjNP23VN/SgtPZd/GtAsCkbc\nasFPWer8XMi3SpQU9wTyh18gcf6YY6WNqrqvmFAEkiAp36ACTjBFIvhgTv37HFFs\n7ax20dL4QoQt4GGNqajIxvcpIhHQgCR1nAzJmw48eLVyRkp6uKgpZhx+1Y+LwV0L\nptYMy8iYwHic34mg9fY4P28+HC9rjm2vrCNjuAzMnyWwT1Y+xGwhuDrN+GpqNR2Y\nUP574hcIFroJzlKXdhU+JFY4sb1R6htfUBL9ipxrYQKBgQD4UzJvHfkA2igY2l67\nuU6Vrzka/v7hDh4PFR4sLsKnY8btAyH91ts+smcVjXzMtNl7+rTehdGS54ePuO+9\n4FIbhEMbkxmp7Dax9cM3c5z1aYlFEnHlrXRJKEsQ/WNgwWf4vTCUUxz8tnz/dwjv\n70L6RxWvTCftAfYAMs1gkCRplwKBgQD+6OdnfB+PAV4K60ooc4X7XOuHH9lLt1it\natLJmNm++lan3pEdoCUU0LjiBhMNjWoLRWmzlYLoTpIyedbyf+5YvjalIGwQrG9D\nBWDlW7vDpOh6m4c1FGXoaz4Y4SFlsIOhSRmbHvhmnnbYfyHL6iyS2vdAcMsUjzTf\nLbo9Y0N6YQKBgQDCYT2FRUz4ocvpSGYHRBKDkNl+jEQvHsHgxIMNyryMEspQFLey\n31BXT4bplAswog/rwF98H/vgpmOy2OyxELq0119AYnEgVcqqmtnouhMO90GAU+Pc\nCV6RNX0tG2uC/WHJjy5LrJNwLdjCkAbq6brf9my+/znxiCtsFFg3Uh1umQKBgQDZ\nqtN+gHUKTiaZuFT4ubzc6XmNRtrsVsF4Q9F+p/C3rVi1u826uHcxkRFun7VBS1IU\nEc+ys6a26/DW/UdYh3llefd7hXYBvty7JCqbb3ukEnsZxxjrcGGc14aNBCDajqG3\n5Y3h8c43AnWFZPndADfTpvqeojIneimxsYBozwxdwQKBgQDHC3663XRlyioqpKrR\nz5q2Oto/BjNdIObuZpQc8Ur8tehlrGcN0wTxR4Mu7fZYFfU6JqBvX2JHHXNalnfy\nE/sDZrsHyha7HExjsFTKxY3R/vVudLenfHXNcsJq+V3tOo2YVtThDC7rLdZJLEmS\nXGxXTvEZm075cqh9ocpt67Plqw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "spry-water-442811-c5@appspot.gserviceaccount.com",
+  "client_id": "111891887404829958135",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spry-water-442811-c5%40appspot.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
