@@ -15,11 +15,6 @@ const server = Hapi.server({
         cors: {
             origin: ['*'], // Mengizinkan semua origin
         },
-        payload: {
-            maxBytes: 1000000, // Maksimal ukuran gambar 1MB
-            parse: true,
-            multipart: true,
-        }
     }
 });
 
