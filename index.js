@@ -35,6 +35,11 @@ async function loadModel() {
 
 // Menyiapkan server dan endpoint
 server.route({
+    method: 'GET',
+    path: '/',
+    handler: () => {
+        return { message: 'Server is running. Use /predict for predictions.' };
+    },
     method: 'POST',
     path: '/predict',
     options: {
