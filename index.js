@@ -7,15 +7,14 @@ const Joi = require('joi');
 const Boom = require('@hapi/boom');
 const stream = require('stream');
 
-// Inisialisasi server Hapi
 const server = Hapi.server({
-    port: process.env.PORT || 8080,
+    port: 8080,
     host: '0.0.0.0',
     routes: {
         cors: {
-            origin: ['*'], // Mengizinkan semua origin
+            origin: ['*'],
         },
-    }
+    },
 });
 
 await server.register({
