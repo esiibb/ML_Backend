@@ -14,7 +14,6 @@ const server = Hapi.server({
     routes: {
         cors: {
             origin: ['*'], // Mengizinkan semua origin
-            additionalHeaders: ['cache-control', 'x-requested-with'], // Header tambahan jika diperlukan
         },
         payload: {
             maxBytes: 1000000, // Maksimal ukuran gambar 1MB
