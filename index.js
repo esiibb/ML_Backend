@@ -18,6 +18,12 @@ const server = Hapi.server({
     },
 });
 
+const firestore = new Firestore({
+    projectId: 'spry-water-442811-c5',
+    keyFilename: path.join(__dirname, 'firestore-key.json'),
+})
+
+
 // Memuat model machine learning
 let model;
 async function loadModel() {
