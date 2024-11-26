@@ -6,7 +6,7 @@ const fs = require('fs');
 const Joi = require('joi');
 const Boom = require('@hapi/boom');
 const stream = require('stream');
-const {Firestore} = require("@google-cloud/firestore");
+const { Firestore } = require("@google-cloud/firestore");  // Baris 8
 
 const server = Hapi.server({
     port: 8080,
@@ -17,8 +17,6 @@ const server = Hapi.server({
         },
     },
 });
-
-const {Firestore} = require("@google-cloud/firestore");  
 const db = new Firestore();
 
 // Memuat model machine learning
