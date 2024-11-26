@@ -20,9 +20,7 @@ const server = Hapi.server({
 
 const {Firestore} = require("@google-cloud/firestore");  
 const db = new Firestore();
-async function store_data() {
-    // Kode akan ditulis di sini.
- }
+
 // Memuat model machine learning
 let model;
 
