@@ -20,6 +20,13 @@ const server = Hapi.server({
     }
 });
 
+await server.register({
+    plugin: cors,
+    options: {
+        origins: ['*'],  
+    }
+});
+
 // Memuat model machine learning
 let model;
 
