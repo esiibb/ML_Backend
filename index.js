@@ -39,11 +39,6 @@ async function savePredictionToFirestore(data) {
 }
 
 server.route({
-    method: 'GET',
-    path: '/',
-    handler: () => {
-        return { message: 'Server is running. Use /predict for predictions.' };
-    },
     method: 'POST',
     path: '/predict',
     options: {
@@ -61,14 +56,10 @@ server.route({
     },
     handler: async (request, h) => {
         try {
-            // Pastikan ada file gambar di payload
             const file = request.payload.image;
             if (!file) {
                 return Boom.badRequest('No image file provided');
             }
-
-        
-            // Mengolah gambar menjadi tensor
             const buffer = await new Promise((resolve, reject) => {
                 const chunks = [];
                 file.pipe(new stream.Writable({
@@ -172,10 +163,9 @@ server.route({
     },
 });
 
-// Menjalankan server
 const start = async () => {
     try {
-        await loadModel(); // Memuat model
+        await loadModel(); 
         await server.start();
         console.log('Server berjalan di ' + server.info.uri);
     } catch (err) {
