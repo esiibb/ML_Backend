@@ -132,15 +132,11 @@ server.route({
             await savePredictionToFirestore(predictionDataToSave);
 
             // Mengembalikan response
-             const response = {
+              const response = {
                 status: 'success',
                 message: 'Model is predicted successfully',
-                data: {
-                    id: uuidv4(),
-                    result: result,
-                    suggestion: suggestion,
-                    createdAt: new Date().toISOString(),
-                },}
+                data: predictionDataToSave
+            };
             return h.response(response).code(200);
         } catch (error) {
             console.error('Error during prediction:', error);
