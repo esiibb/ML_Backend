@@ -9,8 +9,8 @@ const stream = require('stream');
 
 // Inisialisasi server Hapi
 const server = Hapi.server({
-    port: 8080,
-    host: 'localhost',
+    port: process.env.PORT || 8080,
+    host: '0.0.0.0',
     routes: {
         payload: {
             maxBytes: 1000000, // Maksimal ukuran gambar 1MB
