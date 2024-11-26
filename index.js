@@ -12,6 +12,10 @@ const server = Hapi.server({
     port: process.env.PORT || 8080,
     host: '0.0.0.0',
     routes: {
+        cors: {
+            origin: ['*'], // Mengizinkan semua origin
+            additionalHeaders: ['cache-control', 'x-requested-with'], // Header tambahan jika diperlukan
+        },
         payload: {
             maxBytes: 1000000, // Maksimal ukuran gambar 1MB
             parse: true,
