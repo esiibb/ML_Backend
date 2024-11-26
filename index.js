@@ -137,7 +137,12 @@ server.route({
             const response = {
                 status: 'success',
                 message: 'Model is predicted successfully',
-                data: predictionDataToSave
+                data: {
+                    id: predictionDataToSave.id,
+                    result: result,
+                    suggestion: suggestion,
+                    createdAt: predictionDataToSave.createdAt,
+                },
             };
             return h.response(response).code(200);
         } catch (error) {
