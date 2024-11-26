@@ -6,6 +6,7 @@ const fs = require('fs');
 const Joi = require('joi');
 const Boom = require('@hapi/boom');
 const stream = require('stream');
+const {Firestore} = require("@google-cloud/firestore");
 
 const server = Hapi.server({
     port: 8080,
@@ -17,6 +18,11 @@ const server = Hapi.server({
     },
 });
 
+const {Firestore} = require("@google-cloud/firestore");  
+const db = new Firestore();
+async function store_data() {
+    // Kode akan ditulis di sini.
+ }
 // Memuat model machine learning
 let model;
 
@@ -30,7 +36,12 @@ async function loadModel() {
     }
 }
 
-// Menyiapkan server dan endpoint
+async function savePredictionToFirestore(data) {
+    const collectionRef = db.collection('predictions');
+    await collectionRef.doc(data.id).set(data);
+    console.log('Data prediksi berhasil disimpan ke Firestore');
+}
+
 server.route({
     method: 'GET',
     path: '/',
@@ -101,23 +112,21 @@ server.route({
                 result = 'Non-cancer';
                 suggestion = 'Penyakit kanker tidak terdeteksi.';
             }
-
-
-
             console.log(`Hasil Prediksi: ${result}`);
+            const predictionDataToSave = {
+                id: uuidv4(),
+                result: result,
+                suggestion: suggestion,
+                createdAt: new Date().toISOString(),
+            };
+            await savePredictionToFirestore(predictionDataToSave);
 
 
             const response = {
                 status: 'success',
                 message: 'Model is predicted successfully',
-                data: {
-                    id: uuidv4(),
-                    result: result,
-                    suggestion: suggestion,
-                    createdAt: new Date().toISOString(),
-                },
+                data:predictionDataToSave
             };
-
             return h.response(response).code(200);
         } catch (error) {
             console.error('Error during prediction:', error);
@@ -127,6 +136,44 @@ server.route({
             }).code(400);
         }
     }
+});
+
+// Endpoint riwayat prediksi
+server.route({
+    method: 'GET',
+    path: '/predict/histories',
+    handler: async (request, h) => {
+        try {
+            const collectionRef = db.collection('predictions');
+            const snapshot = await collectionRef.get();
+
+            if (snapshot.empty) {
+                return h.response({
+                    status: 'success',
+                    data: [],
+                }).code(200);
+            }
+
+            const histories = [];
+            snapshot.forEach(doc => {
+                histories.push({
+                    id: doc.id,
+                    history: doc.data(),
+                });
+            });
+
+            return h.response({
+                status: 'success',
+                data: histories,
+            }).code(200);
+        } catch (error) {
+            console.error('Error fetching prediction histories:', error);
+            return h.response({
+                status: 'fail',
+                message: 'Terjadi kesalahan dalam mengambil riwayat prediksi',
+            }).code(500);
+        }
+    },
 });
 
 // Menjalankan server
