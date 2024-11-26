@@ -1,12 +1,13 @@
 const Hapi = require('@hapi/hapi');
-const tf = require('@tensorflow/tfjs-node'); 
-const { v4: uuidv4 } = require('uuid'); 
+const tf = require('@tensorflow/tfjs-node'); // TensorFlow.js untuk Node.js
+const { v4: uuidv4 } = require('uuid'); // Untuk ID unik
 const path = require('path');
 const fs = require('fs');
 const Joi = require('joi');
 const Boom = require('@hapi/boom');
 const stream = require('stream');
-const { Firestore } = require("@google-cloud/firestore"); 
+const { Firestore } = require("@google-cloud/firestore");  // Baris 8
+
 const server = Hapi.server({
     port: 8080,
     host: '0.0.0.0',
@@ -23,9 +24,10 @@ const firestore = new Firestore({
 })
 
 
+// Memuat model machine learning
 let model;
 async function loadModel() {
-    const modelPath = path.join(__dirname, 'models', 'model.json');
+    const modelPath = path.join(__dirname, 'models', 'model.json'); // Pastikan ada model.json
     if (fs.existsSync(modelPath)) {
         model = await tf.loadGraphModel(`file://${modelPath}`);
         console.log('Model berhasil dimuat');
@@ -132,7 +134,7 @@ server.route({
             await savePredictionToFirestore(predictionDataToSave);
 
             // Mengembalikan response
-              const response = {
+            const response = {
                 status: 'success',
                 message: 'Model is predicted successfully',
                 data: predictionDataToSave
