@@ -58,6 +58,10 @@ server.route({
                 return Boom.badRequest('No image file provided');
             }
 
+            const fileSize = file.bytes;
+            if (fileSize > 1000000) {  // Jika ukuran file lebih dari 1MB
+                return Boom.payloadTooLarge('Payload content length greater than maximum allowed: 1000000');
+            }
             // Membaca file gambar yang diupload
             const buffer = await new Promise((resolve, reject) => {
                 const chunks = [];
