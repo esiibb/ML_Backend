@@ -181,6 +181,21 @@ server.route({
     },
 });
 
+server.ext('onPreResponse', (request, h) => {
+    const response = request.response;
+
+    if (response.isBoom && response.output.statusCode === 413) {
+        return h
+            .response({
+                status: 'fail',
+                message: 'Payload content length greater than maximum allowed: 1000000',
+            })
+            .code(413);
+    }
+
+    return h.continue;
+});
+
 const start = async () => {
     try {
         await loadModel();  // Memuat model ML sebelum memulai server
