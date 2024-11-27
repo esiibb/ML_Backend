@@ -64,6 +64,13 @@ server.route({
                     message:'Terjadi kesalahan dalam melakukan prediksi',
                 }).code(400);
             }
+            if (file._data.length > 1000000) {
+                // Handle the file size exceeded error
+                return h.response({
+                    status: 'fail',
+                    message: 'Payload content length greater than maximum allowed: 1000000',
+                }).code(413); // Request Entity Too Large (413)
+            }
 
             // Membaca file gambar yang diupload
             const buffer = await new Promise((resolve, reject) => {
@@ -122,12 +129,10 @@ server.route({
             // Mengembalikan response
             const response = {
                 status: 'success',
-                statusCode: 201,
                 message: 'Model is predicted successfully',
                 data: data,
             };
 
-            console.log('Response to frontend:', response);
             return h.response(response).code(201);
         } catch (error) {
             console.error('Error during prediction:', error);
@@ -164,7 +169,6 @@ server.route({
 
             return h.response({
                 status: 'success',
-                statusCode: 201,
                 data: histories,
             }).code(201);
         } catch (error) {
