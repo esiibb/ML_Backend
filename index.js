@@ -9,8 +9,8 @@ const stream = require('stream');
 const { Firestore } = require("@google-cloud/firestore");  // Baris 8
 
 const server = Hapi.server({
-    port: 8080,
-    host: '0.0.0.0',
+    port: process.env.PORT || 8080,
+    host: process.env.HOST || '0.0.0.0',
     routes: {
         cors: {
             origin: ['*'],
@@ -18,10 +18,9 @@ const server = Hapi.server({
     },
 });
 
-const firestore = new Firestore({
-    projectId: 'spry-water-442811-c5',
-    keyFilename: path.join(__dirname, 'service-account.json'),
-})
+process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname, 'service-account.json');
+const firestore = new Firestore();
+
 
 
 // Memuat model machine learning
