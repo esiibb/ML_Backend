@@ -58,18 +58,7 @@ server.route({
                 return Boom.badRequest('No image file provided');
             }
 
-            const fileSize = file.bytes;
-            if (fileSize > 1000000) {  // Jika ukuran file lebih dari 1MB
-                console.log('File size exceeds 1MB');
-                return Boom.payloadTooLarge('Payload content length greater than maximum allowed: 1000000');
-            }
-
-            // Verifikasi format file gambar (misalnya .jpg, .png)
-            const fileExtension = path.extname(file.hapi.filename).toLowerCase();
-            if (!['.jpg', '.jpeg', '.png'].includes(fileExtension)) {
-                console.log('Invalid image format');
-                return Boom.badRequest('Invalid image format. Only JPG, JPEG, and PNG are allowed.');
-            }
+           
             // Membaca file gambar yang diupload
             const buffer = await new Promise((resolve, reject) => {
                 const chunks = [];
