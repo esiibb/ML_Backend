@@ -18,39 +18,22 @@ const server = Hapi.server({
     },
 });
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = path.join(__dirname, 'service-account.json');
-const firestore = new Firestore();
-
-
+const firestore = new Firestore({
+    projectId: 'spry-water-442811-c5'
+});
 
 // Memuat model machine learning
-let model;
-async function loadModel() {
-    const modelPath = path.join(__dirname, 'models', 'model.json'); // Pastikan ada model.json
-    if (fs.existsSync(modelPath)) {
-        model = await tf.loadGraphModel(`file://${modelPath}`);
-        console.log('Model berhasil dimuat');
-    } else {
-        throw new Error('Model file not found');
-    }
-}
-
-
-async function savePredictionToFirestore(data) {
+const loadModel = async () => {
     try {
-        const collectionRef = firestore.collection('predictions');
-        await collectionRef.doc(data.id).set({
-            id: data.id,            // Menyimpan ID response
-            result: data.result,    // Menyimpan hasil prediksi ('Cancer' atau 'Non-cancer')
-            suggestion: data.suggestion, // Menyimpan saran terkait prediksi
-            createdAt: data.createdAt,  // Waktu pembuatan prediksi
-        });
-        console.log('Data prediksi berhasil disimpan ke Firestore');
+        const modelUrl = 'https://storage.googleapis.com/submissionmlgc-esibutarbutar-bucket/models/model.json';
+        model = await tf.loadGraphModel(modelUrl);
+        console.log('Model loaded successfully');
     } catch (error) {
-        console.error('Error storing data to Firestore:', error);
-        throw Boom.internal('Failed to save prediction to Firestore');
+        console.error('Error loading model:', error.message);
+        process.exit(1);
     }
-}
+};
+
 // Rute untuk prediksi
 server.route({
     method: 'POST',
@@ -104,8 +87,8 @@ server.route({
             const predictionData = await prediction.data();
 
             // Probabilitas untuk kelas kanker dan non-kanker
-            const cancerProb = predictionData[0]; 
-            const nonCancerProb = 1 - cancerProb; 
+            const cancerProb = predictionData[0];
+            const nonCancerProb = 1 - cancerProb;
 
             console.log(`Probabilitas Cancer: ${cancerProb}`);
             console.log(`Probabilitas Non-cancer: ${nonCancerProb}`);
@@ -121,28 +104,22 @@ server.route({
                 result = 'Non-cancer';
                 suggestion = 'Penyakit kanker tidak terdeteksi.';
             }
-            console.log(`Hasil Prediksi: ${result}`);
-
-            // Menyimpan hasil prediksi ke Firestore
-            const predictionDataToSave = {
-                id: uuidv4(),  // Menghasilkan ID unik untuk setiap prediksi
+            // Membuat data hasil prediksi
+            const data = {
+                id: uuidv4(),
                 result: result,
                 suggestion: suggestion,
                 createdAt: new Date().toISOString(),
             };
-            await savePredictionToFirestore(predictionDataToSave);
 
             // Mengembalikan response
             const response = {
                 status: 'success',
                 message: 'Model is predicted successfully',
-                data: {
-                    id: predictionDataToSave.id,
-                    result: result,
-                    suggestion: suggestion,
-                    createdAt: predictionDataToSave.createdAt,
-                },
+                data: data,
             };
+
+            console.log('Response to frontend:', response);
             return h.response(response).code(200);
         } catch (error) {
             console.error('Error during prediction:', error);
