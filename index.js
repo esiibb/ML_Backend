@@ -58,12 +58,6 @@ server.route({
                 return Boom.badRequest('No image file provided');
             }
 
-            if (image.hapi.filename === 'bad-request.jpg') {
-                return h.response({
-                    status: 'fail',
-                    message: 'Bad request: Invalid image file',
-                }).code(400);
-            }
 
             // Membaca file gambar yang diupload
             const buffer = await new Promise((resolve, reject) => {
