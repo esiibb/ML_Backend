@@ -61,7 +61,7 @@ server.route({
             if (file.hapi.filename === 'bad-request.jpg') {
                 return h.response({
                     status: 'fail',
-                    message: 'Bad request: Invalid image file',
+                    message:'Terjadi kesalahan dalam melakukan prediksi',
                 }).code(400);
             }
 
@@ -122,6 +122,7 @@ server.route({
             // Mengembalikan response
             const response = {
                 status: 'success',
+                statusCode: 201,
                 message: 'Model is predicted successfully',
                 data: data,
             };
@@ -163,6 +164,7 @@ server.route({
 
             return h.response({
                 status: 'success',
+                statusCode: 201,
                 data: histories,
             }).code(201);
         } catch (error) {
