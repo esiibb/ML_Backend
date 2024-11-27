@@ -26,7 +26,7 @@ const firestore = new Firestore({
 const loadModel = async () => {
     try {
         const modelUrl = 'https://storage.googleapis.com/submissionmlgc-esibutarbutar-bucket/models/model.json';
-        model = await tf.loadGraphModel(modelUrl);
+        let model = await tf.loadGraphModel(modelUrl);
         console.log('Model loaded successfully');
     } catch (error) {
         console.error('Error loading model:', error.message);
